@@ -1,0 +1,15 @@
+require_relative 'rpn_calc.rb'
+
+rpn = RPNCalc.new
+
+loop do
+  print '> '
+  exit if $stdin.eof?
+  (rpn.stack << gets.split(' ')).flatten!
+  rpn.calculate
+  if RPNCalc::OPERANDS.include? rpn.stack.last
+    puts rpn.result unless rpn.result.nil?
+  else
+    puts rpn.stack.last
+  end
+end
